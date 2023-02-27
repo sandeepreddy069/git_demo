@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: A sample template
+Resources:
+  EC2Instance: 
+    Type: "AWS::EC2::Instance"
+    Properties: 
+      ImageId: "ami-05e4a9ce71c318d05" 
+      InstanceType: t2.micro
+      KeyName: 
+        - !Ref KeyPair
+      SecurityGroups:
+        - !Ref Sample
+
+  Sample:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+     GroupDescription: Sample
+     SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '443'
+        Toport: '443' 
+        CidrIp: 0.0.0.0/0     
+       
+
+  KeyPair:
+   Type: AWS::EC2::KeyPair
+   Properties:
+     KeyName: test1
